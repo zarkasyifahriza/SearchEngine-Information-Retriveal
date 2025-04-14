@@ -1,0 +1,18 @@
+body {
+    background-color: #00bbff;
+}
+.search-container {
+    background: linear-gradient(135deg, #13f44f, #295bfd);
+    color: rgb(255, 255, 255);
+    padding: 40px 0;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.search-box {
+    background: rgba(255, 255, 255, 0.159);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
