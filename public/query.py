@@ -1,45 +1,40 @@
 #!/usr/bin/python3
 
-import re
 import sys
 import json
-import pickle
 
-#Argumen check
-if len(sys.argv) != 4 :
-	print ("\n\nPenggunaan\n\tquery.py [indexdb.pkl] [n] [query]..\n")
-	sys.exit(1)
+# Argumen check
+if len(sys.argv) != 4:
+    print(json.dumps({"error": "Penggunaan: query.py [list.json] [n] [query]"}))
+    sys.exit(1)
 
-query = sys.argv[3].split(" ")
+query = sys.argv[3].lower()  # Pastikan query dalam huruf kecil
 n = int(sys.argv[2])
 
-with open(sys.argv[1], 'rb') as indexdb:
-	indexFile = pickle.load(indexdb)
+# Buka file JSON
+with open(sys.argv[1], 'r') as indexdb:
+    indexFile = json.load(indexdb)
 
-#query
-list_doc = {}
-for q in query:
-	try :
-		for doc in indexFile[q]:
-			if doc['url'] in list_doc :
-				list_doc[doc['url']]['score'] += doc['score']
-			else :
-				list_doc[doc['url']] = doc
-	except :
-		continue
+# Query
+list_doc = []
+for doc in indexFile:
+    # Filter berdasarkan query (misalnya, tahun, judul, atau tentang)
+    if query in str(doc.get("Tahun", "")).lower() or \
+       query in doc.get("Title", "").lower() or \
+       query in doc.get("Tentang", "").lower():
+        list_doc.append(doc)
 
+# Sorting list descending berdasarkan score (jika ada)
+result = []
+for data in sorted(list_doc, key=lambda k: k.get('wish_bt', 0), reverse=True)[:n]:
+    result.append({
+        "url": data.get("wrapper_URL", ""),
+        "score": data.get("wish_bt", 0),
+        "title": data.get("Title", "No Title"),
+        "description": data.get("Tentang", "No Description"),
+        "Nomor": data.get("Nomor", "Tidak tersedia")
+			
+    })
 
-#convert to list
-list_data=[]
-for data in list_doc :
-	list_data.append(list_doc[data])
-
-
-#sorting list descending
-count=1;
-for data in sorted(list_data, key=lambda k: k['score'], reverse=True):
-	y = json.dumps(data)
-	print(y)
-	if (count == n) :
-		break
-	count+=1
+# Output as JSON
+print(json.dumps(result))
