@@ -1,4 +1,21 @@
-<!-- filepath: d:\laragon\www\SearchEngine-UTS\resources\views\Landing.blade.php -->
+/*
+|---------------------------------------------------------------
+| Ringkasan Alur Kerja Sistem Search Engine Peraturan
+|---------------------------------------------------------------
+| 1. User mengetik kata kunci dan memilih jumlah hasil (rank).
+| 2. User menekan tombol "Cari".
+| 3. JavaScript mengirim permintaan GET ke route '/search' dengan parameter q dan rank.
+| 4. Route /search dijalankan oleh LandingController@search.
+| 5. Controller menjalankan file Python query.py dengan 3 argumen:
+|    - file list.json
+|    - jumlah hasil (rank)
+|    - kata kunci pencarian
+| 6. Script Python membaca file list.json, mencari data yang cocok dengan kata kunci,
+|    lalu menyusun dan mengembalikan hasil dalam format JSON.
+| 7. Laravel menerima output JSON, mengubahnya menjadi elemen HTML hasil pencarian.
+| 8. Hasil HTML dikirim ke frontend dan ditampilkan dalam <div id="content">.
+*/
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,6 +107,7 @@
 
     <!-- JavaScript -->
     <script>
+        // fungsi ini mengambil hasil dari controller yang sudah diolah oleh script python
         $(document).ready(function() {
             $("#search").click(function() {
                 var cari = $("#cari").val().trim();
