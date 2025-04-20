@@ -1,4 +1,4 @@
-/*
+{{-- /*
 |---------------------------------------------------------------
 | Ringkasan Alur Kerja Sistem Search Engine Peraturan
 |---------------------------------------------------------------
@@ -14,7 +14,7 @@
 |    lalu menyusun dan mengembalikan hasil dalam format JSON.
 | 7. Laravel menerima output JSON, mengubahnya menjadi elemen HTML hasil pencarian.
 | 8. Hasil HTML dikirim ke frontend dan ditampilkan dalam <div id="content">.
-*/
+*/ --}}
 
 <!DOCTYPE html>
 <html lang="en">
