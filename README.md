@@ -22,7 +22,7 @@ Aplikasi dibangun menggunakan Laravel (PHP) dan memanfaatkan skrip Python untuk 
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Laravel 9** - Backend Framework
+- **Laravel 11** - Backend Framework
 - **Python 3** - Pemrosesan Query (TF-IDF / Cosine Similarity)
 - **Bootstrap 5** - UI Framework
 - **jQuery** - AJAX Request
